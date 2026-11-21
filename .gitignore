@@ -29,6 +29,7 @@ wheels/
 **/cookies/
 **/data/
 **/output/
+**/numbered_output/
 cookies/
 data/
 output/
@@ -45,3 +46,5 @@ output/
 .DS_Store
 **/.DS_Store
 *.zip
+
+# FlowBatcher_Bundle/
