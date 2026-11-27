@@ -30,7 +30,7 @@ A lightweight, 1-click local web UI built on top of [kodelyx/flow-agent](https:/
 ## Running from Source & Building the `.exe`
 
 ```bash
-git clone [https://github.com/ABDULLAHAZHERCH/flow-agent.git](https://github.com/ABDULLAHAZHERCH/flow-agent.git)
+git clone https://github.com/ABDULLAHAZHERCH/flow-agent.git
 cd flow-agent
 python flow_batcher.py
 ```

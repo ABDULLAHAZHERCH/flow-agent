@@ -29,7 +29,7 @@ Add the `flow-agent` entry:
     "flow": {
       "command": "python3",
       "args": [
-        "/Users/akashyadav/Akash/Flow-Agent-Work/flow-agent/main.py",
+        "/path/to/flow-agent/main.py",
         "mcp"
       ]
     }
@@ -48,7 +48,7 @@ In your IDE settings or MCP configuration:
 {
   "name": "flow-agent",
   "command": "python3",
-  "args": ["/Users/akashyadav/Akash/Flow-Agent-Work/flow-agent/main.py", "mcp"],
+  "args": ["/path/to/flow-agent/main.py", "mcp"],
   "transport": "stdio"
 }
 ```
@@ -78,7 +78,7 @@ Generates an image from a prompt on Google Flow.
 | `prompt` | `string` | **Yes** | — | Description of the scene or subject to draw. |
 | `aspect` | `string` | No | `"1:1"` | Aspect ratio: `"1:1"`, `"16:9"`, `"9:16"`, `"4:3"`, `"3:4"`, `"square"`, `"landscape"`, `"portrait"`. |
 | `count` | `integer` | No | `1` | Number of variations (1 to 4). |
-| `model` | `string` | No | `"narwhal"` | Engine model: `"narwhal"`, `"harbor_seal"`. |
+| `model` | `string` | No | `"narwhal"` | Engine model: `"narwhal"`, `"harbor_seal"`, `"gem_pix_2"`. |
 | `all_accounts`| `boolean`| No | `false` | Distribute the prompt across all signed-in accounts at once. |
 
 #### Example Tool Call:
@@ -105,6 +105,7 @@ Generates an animated video clip from text or an image.
 | `duration` | `string` | No | `"8s"` | Duration: `"4s"`, `"6s"`, `"8s"`, `"10s"`. |
 | `quality` | `string` | No | `"720p"` | `"720p"` or `"360p"`. |
 | `start_image` | `string` | No | `null` | Local image path or uploaded media ID to animate. |
+| `all_accounts` | `boolean` | No | `false` | Run on every account in `cookies/` concurrently. |
 
 ---
 
@@ -132,7 +133,7 @@ Uploads a local video file and registers it as a reusable media ID for video edi
 #### Parameters:
 | Parameter | Type | Required | Default | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| `path` | `string` | **Yes** | — | Absolute or relative path to the local video file. |
+| `file_path` | `string` | **Yes** | — | Absolute path to the local video file. |
 
 ---
 

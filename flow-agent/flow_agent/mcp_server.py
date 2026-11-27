@@ -51,6 +51,11 @@ TOOLS: list[dict] = [
                     "default": 1,
                     "description": "Variations to ask for.",
                 },
+                "model": {
+                    "type": "string",
+                    "default": "narwhal",
+                    "description": "Image model key (e.g. narwhal, harbor_seal, gem_pix_2).",
+                },
                 "all_accounts": {
                     "type": "boolean",
                     "default": False,
@@ -85,6 +90,10 @@ TOOLS: list[dict] = [
                     "enum": ["720p", "360p"],
                     "default": "720p",
                     "description": "720p costs more credits per render than 360p.",
+                },
+                "start_image": {
+                    "type": "string",
+                    "description": "Local image path or uploaded media ID to animate.",
                 },
                 "all_accounts": {"type": "boolean", "default": False},
             },
@@ -147,20 +156,26 @@ async def call_tool(name: str, arguments: dict) -> dict:
     """Run one tool and return an MCP tool result."""
     try:
         if name == "flow_generate_image":
-            result = await engine.generate_image(
-                prompt=arguments["prompt"],
-                aspect=arguments.get("aspect", "1:1"),
-                count=int(arguments.get("count", 1) or 1),
-                all_accounts=bool(arguments.get("all_accounts", False)),
-            )
+            image_kwargs: dict[str, Any] = {
+                "prompt": arguments["prompt"],
+                "aspect": arguments.get("aspect", "1:1"),
+                "count": int(arguments.get("count", 1) or 1),
+                "all_accounts": bool(arguments.get("all_accounts", False)),
+            }
+            if arguments.get("model"):
+                image_kwargs["model"] = str(arguments["model"])
+            result = await engine.generate_image(**image_kwargs)
         elif name == "flow_generate_video":
-            result = await engine.generate_video(
-                prompt=arguments["prompt"],
-                aspect=arguments.get("aspect", "16:9"),
-                duration=arguments.get("duration", "8s"),
-                quality=arguments.get("quality", "720p"),
-                all_accounts=bool(arguments.get("all_accounts", False)),
-            )
+            video_kwargs: dict[str, Any] = {
+                "prompt": arguments["prompt"],
+                "aspect": arguments.get("aspect", "16:9"),
+                "duration": arguments.get("duration", "8s"),
+                "quality": arguments.get("quality", "720p"),
+                "all_accounts": bool(arguments.get("all_accounts", False)),
+            }
+            if arguments.get("start_image"):
+                video_kwargs["start_image"] = str(arguments["start_image"])
+            result = await engine.generate_video(**video_kwargs)
         elif name == "flow_get_balance":
             result = await engine.get_balance(refresh=bool(arguments.get("refresh", False)))
         elif name == "flow_get_stats":
@@ -306,6 +321,7 @@ def create_sse_app():
 
         return StreamingResponse(events(), media_type="text/event-stream")
 
+    @app.post("/messages")
     @app.post("/messages/")
     async def messages(request: Request):
         session_id = request.query_params.get("session_id", "")

@@ -76,7 +76,7 @@ python main.py mcp --sse [--host HOST] [--port PORT]
 - `flow_generate_video` — text/image-to-video
 - `flow_get_balance` — account credits
 - `flow_get_stats` — generation history
-- `flow_get_projects` — list Flow projects
+- `flow_upload_video` — upload a local video and return its media ID
 
 ---
 

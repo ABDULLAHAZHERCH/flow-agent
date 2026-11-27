@@ -172,6 +172,26 @@ async def test_tools_call_defaults_are_applied(fake_engine):
     assert kwargs["quality"] == "720p"
 
 
+async def test_tools_call_passes_optional_model_and_start_image(fake_engine):
+    await reply(
+        "tools/call",
+        params={
+            "name": "flow_generate_image",
+            "arguments": {"prompt": "a boat", "model": "harbor_seal"},
+        },
+    )
+    assert fake_engine.calls[-1][1]["model"] == "harbor_seal"
+
+    await reply(
+        "tools/call",
+        params={
+            "name": "flow_generate_video",
+            "arguments": {"prompt": "zoom", "start_image": "/tmp/frame.png"},
+        },
+    )
+    assert fake_engine.calls[-1][1]["start_image"] == "/tmp/frame.png"
+
+
 async def test_a_missing_argument_is_an_error_result_not_a_crash(fake_engine):
     body = await reply(
         "tools/call", params={"name": "flow_generate_image", "arguments": {}}

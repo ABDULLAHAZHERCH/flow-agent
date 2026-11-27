@@ -50,7 +50,7 @@ sequenceDiagram
 3. Click **Load unpacked** (top left).
 4. Select the directory:
    ```text
-   /Users/akashyadav/Akash/Flow-Agent-Work/extension
+   <repo-root>/flow-extension
    ```
 5. Pin the **Flow Extension** icon in your toolbar.
 

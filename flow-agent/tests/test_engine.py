@@ -1,5 +1,6 @@
 """Tests for the engine bridge: result extraction and the read-only queries."""
 
+from pathlib import Path
 import sqlite3
 
 import pytest
@@ -82,7 +83,7 @@ def test_extract_json_raises_on_a_truncated_object():
 def test_command_drops_arguments_that_were_not_given():
     engine = FlowEngine(root="/tmp", binary="/bin/echo")
     assert engine._command("image", "a boat", None, "", "x2") == [
-        "/bin/echo",
+        str(Path("/bin/echo")),
         "image",
         "a boat",
         "x2",
@@ -92,7 +93,7 @@ def test_command_drops_arguments_that_were_not_given():
 def test_command_keeps_falsy_values_that_are_not_absent():
     """`0` is a value. Only None and "" mean "not given"."""
     engine = FlowEngine(root="/tmp", binary="/bin/echo")
-    assert engine._command("image", "p", 0) == ["/bin/echo", "image", "p", "0"]
+    assert engine._command("image", "p", 0) == [str(Path("/bin/echo")), "image", "p", "0"]
 
 
 # --------------------------------------------------------------------------- #

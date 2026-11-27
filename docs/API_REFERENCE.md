@@ -265,14 +265,16 @@ Lists Google Flow projects associated with the active account. Useful for confir
 #### Response `200 OK`
 
 ```json
-[
-  {
-    "project_id": "07543949-1b85-4161-85a7-09387d3a95fc",
-    "display_name": "My Flow Project",
-    "thumbnail": "https://...",
-    "last_asset_id": "f8622c5f-be69-..."
-  }
-]
+{
+  "projects": [
+    {
+      "project_id": "07543949-1b85-4161-85a7-09387d3a95fc",
+      "display_name": "My Flow Project",
+      "thumbnail": "https://...",
+      "last_asset_id": "f8622c5f-be69-..."
+    }
+  ]
+}
 ```
 
 ---

@@ -38,9 +38,11 @@
    - Images are strictly numbered 001.jpg, 002.jpg, 003.jpg matching your prompt order.
    - Click "Open Output Folder" to view your images.
 
-7. If any image shows a red "ERROR" badge:
-   - Wait for the batch to finish, then click the orange "Retry Failed" button.
-   - It will only re-run the failed ones and save them with their exact original numbers.
+7. If you need to stop mid-batch, click the red "Stop" button.
+   If any image shows a red "ERROR" or "CANCELLED" badge:
+   - Wait for the batch to finish (or stop it), optionally switch Model/Aspect, then click
+     the orange "Retry Failed" / "Retry Unfinished" button.
+   - It will only re-run unfinished prompts and save them with their exact original numbers.
 
 8. When you are completely finished:
    - Click the red "Quit App" button at the top-right before closing the tab.
